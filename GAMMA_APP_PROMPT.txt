@@ -1,0 +1,33 @@
+Crie uma apresentação técnica e objetiva de 8 slides sobre o projeto "Desafio GDash", focada em Engenharia de Software e Boas Práticas.
+
+Estrutura dos Slides:
+
+1. **Capa**: Título "Desafio GDash", Subtítulo "Engenharia de Software e Boas Práticas". Visual clean e profissional.
+
+2. **Estratégia de Desenvolvimento**: A colaboração "Humano + IA" focada em Arquitetura e Qualidade. O desenvolvedor atua como Arquiteto (Definindo Padrões e Segurança) e a IA como Aceleradora de Implementação. Resultado: Código robusto entregue com agilidade.
+
+3. **Arquitetura e Infraestrutura**: Diagrama visual mostrando a orquestração via Docker Compose. Mencione a arquitetura orientada a eventos (RabbitMQ) e a separação de responsabilidades (Microsserviços).
+
+4. **Padrões de Projeto (Design Patterns)**: Liste os padrões utilizados:
+   - Clean Architecture (Backend)
+   - Repository Pattern: Isolamento total entre regra de negócio e banco de dados. Permite trocar a tecnologia de armazenamento (ex: de Mongo para SQL) sem impactar o sistema.
+   - Dependency Injection (Desacoplamento)
+   - SOLID Principles
+
+5. **Qualidade e Testes**: Foco na confiança da aplicação. Mencione:
+   - Testes Unitários (Jest/Vitest)
+   - Testes de Integração
+   - Cobertura de código para garantir robustez.
+
+6. **Segurança em Primeiro Lugar**: Pontos chave:
+   - Autenticação via JWT (Stateless)
+   - Sanitização de dados (DTOs)
+   - Gerenciamento de Segredos (.env)
+
+7. **Execução do Projeto**: Simplicidade e Automação (DX).
+   - Rodar o Projeto: `docker-compose up --build`
+   - Rodar os Testes: `npm run test` (Unitários) e `python integration_test.py` (Integração).
+
+8. **Conclusão**: Resumo: "Uma aplicação moderna, segura e testável, pronta para escalar".
+
+Estilo: Profissional, Engenharia, Dark Mode, Ícones de infraestrutura e código.

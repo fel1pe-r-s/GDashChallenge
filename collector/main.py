@@ -17,9 +17,9 @@ RABBITMQ_USER = os.getenv('RABBITMQ_USER', 'guest')
 RABBITMQ_PASSWORD = os.getenv('RABBITMQ_PASSWORD', 'guest')
 RABBITMQ_HOST = os.getenv('RABBITMQ_HOST', 'rabbitmq')
 RABBITMQ_PORT = int(os.getenv('RABBITMQ_PORT', 5672))
-LATITUDE = os.getenv('LATITUDE', '-23.5505')
-LONGITUDE = os.getenv('LONGITUDE', '-46.6333')
-CITY_NAME = os.getenv('CITY_NAME', 'Sao Paulo')
+LATITUDE = os.getenv('LATITUDE')
+LONGITUDE = os.getenv('LONGITUDE')
+CITY_NAME = os.getenv('CITY_NAME')
 
 @dataclass
 class WeatherData:
@@ -76,6 +76,10 @@ def fetch_weather_data() -> Optional[WeatherData]:
     lat = config['latitude']
     lon = config['longitude']
     city = config['city']
+
+    if not lat or not lon:
+        logger.warning("Latitude/Longitude not configured. Waiting for config update...")
+        return None
 
     url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&current_weather=true&hourly=relativehumidity_2m,windspeed_10m"
     try:

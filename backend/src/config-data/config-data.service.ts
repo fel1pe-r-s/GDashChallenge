@@ -19,11 +19,11 @@ export class ConfigDataService {
       return config;
     }
 
-    // Fallback to env vars
+    // Fallback to env vars (with empty string defaults if not set)
     return {
-      city: this.configService.get<string>('CITY_NAME', 'Sao Paulo'),
-      latitude: this.configService.get<string>('LATITUDE', '-23.5505'),
-      longitude: this.configService.get<string>('LONGITUDE', '-46.6333'),
+      city: this.configService.get<string>('CITY_NAME', ''),
+      latitude: this.configService.get<string>('LATITUDE', ''),
+      longitude: this.configService.get<string>('LONGITUDE', ''),
     };
   }
 

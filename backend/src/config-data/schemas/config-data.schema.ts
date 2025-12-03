@@ -5,13 +5,13 @@ export type ConfigDataDocument = ConfigData & Document;
 
 @Schema({ timestamps: true })
 export class ConfigData {
-  @Prop({ required: true, default: 'Sao Paulo' })
+  @Prop({ required: true })
   city: string;
 
-  @Prop({ required: true, default: '-23.5505' })
+  @Prop({ required: true })
   latitude: string;
 
-  @Prop({ required: true, default: '-46.6333' })
+  @Prop({ required: true })
   longitude: string;
 }
 

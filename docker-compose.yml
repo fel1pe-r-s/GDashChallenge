@@ -62,8 +62,6 @@ services:
       - RABBITMQ_HOST=rabbitmq
       - RABBITMQ_USER=${RABBITMQ_USER}
       - RABBITMQ_PASSWORD=${RABBITMQ_PASSWORD}
-      - LATITUDE=-23.5505
-      - LONGITUDE=-46.6333
     depends_on:
       - rabbitmq
     networks:
