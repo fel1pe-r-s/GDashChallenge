@@ -58,4 +58,4 @@ Para entender a fundo cada parte do projeto, consulte nossos guias educativos:
 
 ## Vídeo Explicativo
 
-[Link para o vídeo]
+[Assista ao vídeo de apresentação](https://youtu.be/lsJYrzuBF9I)

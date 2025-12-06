@@ -55,7 +55,7 @@ const Documentation = () => {
                 <h3 className="font-semibold mb-2 text-red-400">Backend (NestJS)</h3>
                 <p className="text-sm text-slate-500">
                   REST API that stores data in MongoDB and provides endpoints for the frontend.
-                  Includes Swagger documentation at <a href="http://localhost:3000/api/docs" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">/api/docs</a>.
+                  Includes Swagger documentation at <a href={`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/docs`} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">/api/docs</a>.
                 </p>
               </div>
 
@@ -78,7 +78,7 @@ const Documentation = () => {
               The backend provides a comprehensive Swagger UI for exploring the API endpoints.
             </p>
             <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white">
-              <a href="http://localhost:3000/api/docs" target="_blank" rel="noopener noreferrer">
+              <a href={`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/docs`} target="_blank" rel="noopener noreferrer">
                 Open Swagger UI
               </a>
             </Button>
