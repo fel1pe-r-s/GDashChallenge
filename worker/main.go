@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 	"time"
 
 	amqp "github.com/rabbitmq/amqp091-go"
@@ -18,25 +19,28 @@ func failOnError(err error, msg string) {
 }
 
 func connectRabbitMQ() (*amqp.Connection, error) {
-	user := os.Getenv("RABBITMQ_USER")
-	pass := os.Getenv("RABBITMQ_PASSWORD")
-	host := os.Getenv("RABBITMQ_HOST")
-	port := os.Getenv("RABBITMQ_PORT")
+	connStr := os.Getenv("RABBITMQ_URI")
+	if connStr == "" {
+		user := os.Getenv("RABBITMQ_USER")
+		pass := os.Getenv("RABBITMQ_PASSWORD")
+		host := os.Getenv("RABBITMQ_HOST")
+		port := os.Getenv("RABBITMQ_PORT")
 
-	if user == "" {
-		user = "guest"
-	}
-	if pass == "" {
-		pass = "guest"
-	}
-	if host == "" {
-		host = "rabbitmq"
-	}
-	if port == "" {
-		port = "5672"
-	}
+		if user == "" {
+			user = "guest"
+		}
+		if pass == "" {
+			pass = "guest"
+		}
+		if host == "" {
+			host = "rabbitmq"
+		}
+		if port == "" {
+			port = "5672"
+		}
 
-	connStr := fmt.Sprintf("amqp://%s:%s@%s:%s/", user, pass, host, port)
+		connStr = fmt.Sprintf("amqp://%s:%s@%s:%s/", user, pass, host, port)
+	}
 
 	var counts int64
 	var backOff = 1 * time.Second
@@ -67,6 +71,8 @@ func postToBackend(data []byte) error {
 	backendURL := os.Getenv("BACKEND_URL")
 	if backendURL == "" {
 		backendURL = "http://backend:3000/weather/logs"
+	} else if !strings.HasPrefix(backendURL, "http://") && !strings.HasPrefix(backendURL, "https://") {
+		backendURL = "http://" + backendURL
 	}
 
 	resp, err := http.Post(backendURL, "application/json", bytes.NewBuffer(data))
@@ -76,7 +82,7 @@ func postToBackend(data []byte) error {
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusCreated && resp.StatusCode != http.StatusOK {
-		return fmt.Errorf("backend returned status: %d", resp.StatusCode)
+		return fmt.Errorf("backend returned status: %d (URL: %s)", resp.StatusCode, backendURL)
 	}
 
 	return nil

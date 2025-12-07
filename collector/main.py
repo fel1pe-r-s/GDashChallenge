@@ -115,8 +115,12 @@ def fetch_weather_data() -> Optional[WeatherData]:
 
 def publish_to_rabbitmq(data: WeatherData):
     """Publishes weather data to RabbitMQ with retry logic."""
-    credentials = pika.PlainCredentials(RABBITMQ_USER, RABBITMQ_PASSWORD)
-    parameters = pika.ConnectionParameters(host=RABBITMQ_HOST, port=RABBITMQ_PORT, credentials=credentials)
+    rabbitmq_uri = os.getenv('RABBITMQ_URI')
+    if rabbitmq_uri:
+        parameters = pika.URLParameters(rabbitmq_uri)
+    else:
+        credentials = pika.PlainCredentials(RABBITMQ_USER, RABBITMQ_PASSWORD)
+        parameters = pika.ConnectionParameters(host=RABBITMQ_HOST, port=RABBITMQ_PORT, credentials=credentials)
     
     max_retries = 5
     retry_delay = 5
@@ -161,8 +165,12 @@ import threading
 
 def listen_for_updates():
     """Listens for configuration updates from RabbitMQ."""
-    credentials = pika.PlainCredentials(RABBITMQ_USER, RABBITMQ_PASSWORD)
-    parameters = pika.ConnectionParameters(host=RABBITMQ_HOST, port=RABBITMQ_PORT, credentials=credentials)
+    rabbitmq_uri = os.getenv('RABBITMQ_URI')
+    if rabbitmq_uri:
+        parameters = pika.URLParameters(rabbitmq_uri)
+    else:
+        credentials = pika.PlainCredentials(RABBITMQ_USER, RABBITMQ_PASSWORD)
+        parameters = pika.ConnectionParameters(host=RABBITMQ_HOST, port=RABBITMQ_PORT, credentials=credentials)
     
     while True:
         try:

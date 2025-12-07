@@ -8,6 +8,9 @@ import { WeatherModule } from './weather/weather.module';
 import { PublicApiModule } from './public-api/public-api.module';
 import { ConfigDataModule } from './config-data/config-data.module';
 
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -24,5 +27,7 @@ import { ConfigDataModule } from './config-data/config-data.module';
     PublicApiModule,
     ConfigDataModule,
   ],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
