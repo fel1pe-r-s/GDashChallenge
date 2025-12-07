@@ -82,7 +82,7 @@ func postToBackend(data []byte) error {
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusCreated && resp.StatusCode != http.StatusOK {
-		return fmt.Errorf("backend returned status: %d", resp.StatusCode)
+		return fmt.Errorf("backend returned status: %d (URL: %s)", resp.StatusCode, backendURL)
 	}
 
 	return nil
