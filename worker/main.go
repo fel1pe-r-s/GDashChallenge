@@ -18,25 +18,28 @@ func failOnError(err error, msg string) {
 }
 
 func connectRabbitMQ() (*amqp.Connection, error) {
-	user := os.Getenv("RABBITMQ_USER")
-	pass := os.Getenv("RABBITMQ_PASSWORD")
-	host := os.Getenv("RABBITMQ_HOST")
-	port := os.Getenv("RABBITMQ_PORT")
+	connStr := os.Getenv("RABBITMQ_URI")
+	if connStr == "" {
+		user := os.Getenv("RABBITMQ_USER")
+		pass := os.Getenv("RABBITMQ_PASSWORD")
+		host := os.Getenv("RABBITMQ_HOST")
+		port := os.Getenv("RABBITMQ_PORT")
 
-	if user == "" {
-		user = "guest"
-	}
-	if pass == "" {
-		pass = "guest"
-	}
-	if host == "" {
-		host = "rabbitmq"
-	}
-	if port == "" {
-		port = "5672"
-	}
+		if user == "" {
+			user = "guest"
+		}
+		if pass == "" {
+			pass = "guest"
+		}
+		if host == "" {
+			host = "rabbitmq"
+		}
+		if port == "" {
+			port = "5672"
+		}
 
-	connStr := fmt.Sprintf("amqp://%s:%s@%s:%s/", user, pass, host, port)
+		connStr = fmt.Sprintf("amqp://%s:%s@%s:%s/", user, pass, host, port)
+	}
 
 	var counts int64
 	var backOff = 1 * time.Second
