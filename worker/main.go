@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 	"time"
 
 	amqp "github.com/rabbitmq/amqp091-go"
@@ -70,6 +71,8 @@ func postToBackend(data []byte) error {
 	backendURL := os.Getenv("BACKEND_URL")
 	if backendURL == "" {
 		backendURL = "http://backend:3000/weather/logs"
+	} else if !strings.HasPrefix(backendURL, "http://") && !strings.HasPrefix(backendURL, "https://") {
+		backendURL = "http://" + backendURL
 	}
 
 	resp, err := http.Post(backendURL, "application/json", bytes.NewBuffer(data))
