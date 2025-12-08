@@ -1,15 +1,53 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [isLoadingLocation, setIsLoadingLocation] = useState(true);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const initializeLocation = async () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          async (position) => {
+            const { latitude, longitude } = position.coords;
+            try {
+              // Update config with current location (public endpoint)
+              await axios.put(
+                `${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/config`,
+                {
+                  city: "Current Location", 
+                  latitude: latitude.toString(),
+                  longitude: longitude.toString(),
+                }
+              );
+            } catch (error) {
+              console.error('Failed to update location config:', error);
+            } finally {
+              setIsLoadingLocation(false);
+            }
+          },
+          (error) => {
+            console.error('Error getting location:', error);
+            setIsLoadingLocation(false);
+          },
+          { timeout: 10000 } // 10s timeout
+        );
+      } else {
+        setIsLoadingLocation(false);
+      }
+    };
+
+    initializeLocation();
+  }, []);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,6 +69,27 @@ const Login = () => {
       }
     }
   };
+
+  if (isLoadingLocation) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-slate-950">
+        <Card className="w-[350px] bg-slate-900 border-slate-800 text-slate-100">
+          <CardHeader>
+            <Skeleton className="h-8 w-3/4 mx-auto bg-slate-800" />
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="space-y-2">
+              <Skeleton className="h-10 w-full bg-slate-800" />
+            </div>
+            <div className="space-y-2">
+              <Skeleton className="h-10 w-full bg-slate-800" />
+            </div>
+            <Skeleton className="h-10 w-full bg-slate-800" />
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-slate-950">

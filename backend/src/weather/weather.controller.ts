@@ -5,12 +5,14 @@ import { WeatherMapper } from './domain/weather.mapper';
 import type { Response } from 'express';
 import * as XLSX from 'xlsx';
 
+import { CreateLogDto } from './dto/create-log.dto';
+
 @Controller('weather')
 export class WeatherController {
   constructor(private readonly weatherService: WeatherService) {}
 
   @Post('logs')
-  async createLog(@Body() body: any) {
+  async createLog(@Body() body: CreateLogDto) {
     const result = await this.weatherService.createLog(body);
     if (result.isLeft()) {
       return { error: result.value.message };

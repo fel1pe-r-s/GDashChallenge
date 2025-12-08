@@ -221,28 +221,28 @@ const Dashboard = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <StatCard 
           title="Temperature" 
-          value={`${latest.temperature?.toFixed(1)}°C`} 
+          value={latest.temperature !== undefined ? `${latest.temperature.toFixed(1)}°C` : '--'} 
           icon={Thermometer} 
           description="Feels like 2° higher"
           loading={isUpdating}
         />
         <StatCard 
           title="Humidity" 
-          value={`${latest.humidity}%`} 
+          value={latest.humidity !== undefined ? `${latest.humidity}%` : '--'} 
           icon={Droplets} 
           description="Dew point 18°C"
           loading={isUpdating}
         />
         <StatCard 
           title="Wind Speed" 
-          value={`${latest.windSpeed} km/h`} 
+          value={latest.windSpeed !== undefined ? `${latest.windSpeed} km/h` : '--'} 
           icon={Wind} 
           description="Direction NW"
           loading={isUpdating}
         />
         <StatCard 
           title="Condition" 
-          value={latest.condition} 
+          value={latest.condition || '--'} 
           icon={CloudSun} 
           description="Updated just now"
           loading={isUpdating}

@@ -27,8 +27,17 @@ describe('Error Scenarios (e2e)', () => {
           if (key === 'MONGO_URI') return uri;
           if (key === 'JWT_SECRET') return 'test_secret';
           if (key === 'DEFAULT_ADMIN_PASSWORD') return 'admin123';
-          return null;
+          if (key === 'DEFAULT_ADMIN_EMAIL') return 'admin@example.com';
+          return undefined;
         },
+      })
+      .overrideProvider('ConfigDataService')
+      .useValue({
+        getConfig: jest.fn().mockResolvedValue({
+          city: 'Test City',
+          latitude: '0',
+          longitude: '0',
+        }),
       })
       .compile();
 
@@ -137,7 +146,7 @@ describe('Error Scenarios (e2e)', () => {
       return request(app.getHttpServer())
         .post('/weather/logs')
         .send({ city: 'Test' })
-        .expect(201); // Still creates but with undefined values
+        .expect(400); // Fails due to missing required fields
     });
 
     it('should return empty insights when no data', async () => {
@@ -176,7 +185,7 @@ describe('Error Scenarios (e2e)', () => {
       return request(app.getHttpServer())
         .post('/users')
         .send({ email: longEmail, password: 'password' })
-        .expect(201);
+        .expect(400);
     });
 
     it('should handle special characters in password', () => {

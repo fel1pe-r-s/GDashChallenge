@@ -27,6 +27,14 @@ describe('Auth System (e2e)', () => {
           return null;
         },
       })
+      .overrideProvider('ConfigDataService')
+      .useValue({
+        getConfig: jest.fn().mockResolvedValue({
+          city: 'Test City',
+          latitude: '0',
+          longitude: '0',
+        }),
+      })
       .compile();
 
     app = moduleFixture.createNestApplication();

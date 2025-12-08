@@ -28,7 +28,7 @@ class WeatherData:
     humidity: int
     windSpeed: float
     condition: str
-    timestamp: str
+    timestamp: float
 
 def get_weather_condition(code: int) -> str:
     """Maps WMO Weather interpretation codes to string conditions."""
@@ -56,6 +56,7 @@ def get_config():
         response = requests.get(f"{backend_url}/config", timeout=5)
         if response.status_code == 200:
             config = response.json()
+            
             return {
                 'city': config.get('city', CITY_NAME),
                 'latitude': config.get('latitude', LATITUDE),
@@ -106,7 +107,7 @@ def fetch_weather_data() -> Optional[WeatherData]:
             humidity=humidity,
             windSpeed=current_weather.get('windspeed', 0.0),
             condition=get_weather_condition(current_weather.get('weathercode', 0)),
-            timestamp=datetime.now().isoformat()
+            timestamp=datetime.now().timestamp()
         )
         return weather
     except requests.RequestException as e:

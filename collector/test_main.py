@@ -101,9 +101,16 @@ class TestWeatherData:
 class TestFetchWeatherData:
     """Tests for weather data fetching from API."""
     
+    @patch('main.get_config')
     @patch('main.requests.get')
     @patch('main.datetime')
-    def test_successful_fetch(self, mock_datetime, mock_get):
+    def test_successful_fetch(self, mock_datetime, mock_get, mock_config):
+        # Mock config
+        mock_config.return_value = {
+            'city': 'Test City',
+            'latitude': -23.55,
+            'longitude': -46.63
+        }
         # Mock datetime
         mock_datetime.now.return_value.isoformat.return_value = "2024-01-01T12:00:00"
         
@@ -133,8 +140,15 @@ class TestFetchWeatherData:
         assert weather.condition == "Clear sky"
         assert weather.timestamp == "2024-01-01T12:00:00"
     
+    @patch('main.get_config')
     @patch('main.requests.get')
-    def test_api_request_error(self, mock_get):
+    def test_api_request_error(self, mock_get, mock_config):
+        # Mock config
+        mock_config.return_value = {
+            'city': 'Test City',
+            'latitude': -23.55,
+            'longitude': -46.63
+        }
         import requests
         # Config call fails but is caught, weather API call also fails
         def side_effect_func(url, **kwargs):
@@ -146,8 +160,15 @@ class TestFetchWeatherData:
         
         assert weather is None
     
+    @patch('main.get_config')
     @patch('main.requests.get')
-    def test_api_timeout(self, mock_get):
+    def test_api_timeout(self, mock_get, mock_config):
+        # Mock config
+        mock_config.return_value = {
+            'city': 'Test City',
+            'latitude': -23.55,
+            'longitude': -46.63
+        }
         import requests
         mock_get.side_effect = requests.Timeout("Request timeout")
         
@@ -155,9 +176,16 @@ class TestFetchWeatherData:
         
         assert weather is None
     
+    @patch('main.get_config')
     @patch('main.requests.get')
     @patch('main.datetime')
-    def test_missing_humidity_data(self, mock_datetime, mock_get):
+    def test_missing_humidity_data(self, mock_datetime, mock_get, mock_config):
+        # Mock config
+        mock_config.return_value = {
+            'city': 'Test City',
+            'latitude': -23.55,
+            'longitude': -46.63
+        }
         mock_datetime.now.return_value.isoformat.return_value = "2024-01-01T12:00:00"
         
         mock_response = Mock()

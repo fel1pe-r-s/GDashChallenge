@@ -1,4 +1,4 @@
-import { IsString, IsNumber } from 'class-validator';
+import { IsString, IsNumber, IsOptional } from 'class-validator';
 
 export class CreateLogDto {
   @IsString()
@@ -17,5 +17,6 @@ export class CreateLogDto {
   condition: string;
 
   @IsNumber()
+  @IsOptional()
   timestamp: number;
 }
