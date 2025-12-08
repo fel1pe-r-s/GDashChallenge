@@ -113,6 +113,7 @@ class TestFetchWeatherData:
         }
         # Mock datetime
         mock_datetime.now.return_value.isoformat.return_value = "2024-01-01T12:00:00"
+        mock_datetime.now.return_value.timestamp.return_value = 1704110400.0
         
         # Mock API response
         mock_response = Mock()
@@ -138,7 +139,7 @@ class TestFetchWeatherData:
         assert weather.humidity == 65
         assert weather.windSpeed == 12.3
         assert weather.condition == "Clear sky"
-        assert weather.timestamp == "2024-01-01T12:00:00"
+        assert weather.timestamp == 1704110400.0
     
     @patch('main.get_config')
     @patch('main.requests.get')
