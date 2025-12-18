@@ -1,4 +1,4 @@
-# Redesign Dashboard
+#GDashChallenge # Redesign Dashboard
 
 ## Goal Description
 Redesign the Dashboard to match the requested premium, dark-themed aesthetic. The new design will feature a sleek dark blue/slate background, improved cards, AI insight banners, and detailed charts and tables.

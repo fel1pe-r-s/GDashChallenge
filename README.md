@@ -1,4 +1,6 @@
-# Desafio Full-Stack GDash
+#GDashChallenge # Desafio Full-Stack GDash
+
+**Tags**: #Autenticação&autorização #CSS #Docker #Express #Go #Html #JavaScript #Markdown #Nest-js #Node #Python #React #Tailwind #Tests #TypeScript #jest #vitest
 
 Este projeto é uma solução completa para o desafio de coleta e visualização de dados climáticos.
 

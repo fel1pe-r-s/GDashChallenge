@@ -1,4 +1,4 @@
-# Guia de Aprendizado: Frontend (React)
+#GDashChallenge # Guia de Aprendizado: Frontend (React)
 
 Este guia vai te ensinar como a "cara" do nosso projeto funciona. O Frontend é feito em **React**, uma biblioteca que permite criar sites como se estivéssemos montando peças de LEGO.
 

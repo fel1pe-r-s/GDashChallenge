@@ -1,4 +1,4 @@
-# Guia de Aprendizado: Collector (Python)
+#GDashChallenge # Guia de Aprendizado: Collector (Python)
 
 Este guia vai te ensinar como o nosso "Coletor" funciona. Ele é um script em Python simples, mas poderoso, que age como um robô buscando informações.
 

@@ -1,4 +1,4 @@
-# Security Audit Report
+#GDashChallenge # Security Audit Report
 
 ## Executive Summary
 Comprehensive security audit conducted on the full-stack weather application. Multiple vulnerabilities identified and resolved.

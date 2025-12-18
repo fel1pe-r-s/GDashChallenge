@@ -1,4 +1,4 @@
-# Frontend Documentation
+#GDashChallenge # Frontend Documentation
 
 ## Overview
 React + Vite application with TypeScript, Tailwind CSS, and shadcn/ui components.

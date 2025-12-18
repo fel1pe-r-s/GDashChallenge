@@ -1,4 +1,4 @@
-# Backend API Documentation
+#GDashChallenge # Backend API Documentation
 
 ## Overview
 NestJS-based REST API for weather data management with JWT authentication.

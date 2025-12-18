@@ -1,4 +1,4 @@
-# Guia de Apresentação Técnica do Projeto
+#GDashChallenge # Guia de Apresentação Técnica do Projeto
 
 Este guia detalhado vai te ajudar a explicar o funcionamento técnico do projeto "Desafio GDash". O sistema é uma aplicação distribuída moderna, utilizando microsserviços e mensageria.
 

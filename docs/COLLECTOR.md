@@ -1,4 +1,4 @@
-# Collector Documentation
+#GDashChallenge # Collector Documentation
 
 ## Overview
 Python service that fetches weather data from Open-Meteo API and publishes to RabbitMQ.

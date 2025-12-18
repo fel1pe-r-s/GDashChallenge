@@ -1,4 +1,4 @@
-# E2E Tests with Playwright
+#GDashChallenge # E2E Tests with Playwright
 
 This directory contains end-to-end tests for the frontend application using Playwright.
 

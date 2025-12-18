@@ -1,4 +1,4 @@
-# Guia de Aprendizado: Worker (Go)
+#GDashChallenge # Guia de Aprendizado: Worker (Go)
 
 Este guia vai te ensinar como o nosso "Operário" funciona. Ele é escrito em **Go (Golang)**, uma linguagem famosa pela sua velocidade e capacidade de fazer várias coisas ao mesmo tempo.
 

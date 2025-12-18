@@ -1,4 +1,4 @@
-# Environment Variables Guide
+#GDashChallenge # Environment Variables Guide
 
 ## Overview
 Complete reference for all environment variables used across the application.

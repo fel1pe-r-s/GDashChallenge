@@ -1,4 +1,4 @@
-# Relatório de Desenvolvimento e Colaboração AI
+#GDashChallenge # Relatório de Desenvolvimento e Colaboração AI
 
 Este documento detalha a metodologia de desenvolvimento, padrões arquiteturais e práticas de segurança adotadas neste projeto, que foi construído através de uma colaboração estreita entre um Desenvolvedor e Inteligência Artificial.
 

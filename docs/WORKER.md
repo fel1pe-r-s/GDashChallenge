@@ -1,4 +1,4 @@
-# Worker Documentation
+#GDashChallenge # Worker Documentation
 
 ## Overview
 Go service that consumes weather data from RabbitMQ and posts to the Backend API.
